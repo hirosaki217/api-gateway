@@ -8,9 +8,9 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>springframework.boot</groupId>
-	<artifactId>svc-book</artifactId>
+	<artifactId>svc-rating</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>svc-book</name>
+	<name>svc-rating</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>11</java.version>
