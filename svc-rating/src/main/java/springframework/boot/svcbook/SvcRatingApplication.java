@@ -8,10 +8,10 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @SpringBootApplication
 @EnableTransactionManagement(order=Ordered.LOWEST_PRECEDENCE, mode=AdviceMode.ASPECTJ)
-public class SvcBookApplication {
+public class SvcRatingApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SvcBookApplication.class, args);
+		SpringApplication.run(SvcRatingApplication.class, args);
 	}
 
 }

@@ -22,7 +22,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.httpBasic().disable().authorizeRequests().regexMatchers("^/ratings\\?bookId.*$").authenticated()
 				.antMatchers(HttpMethod.POST, "/ratings").authenticated().antMatchers(HttpMethod.PATCH, "/ratings/*")
 				.hasRole("ADMIN").antMatchers(HttpMethod.DELETE, "/ratings/*").hasRole("ADMIN")
-				.antMatchers(HttpMethod.GET, "/ratings").hasRole("ADMIN").anyRequest().authenticated().and().csrf()
+				.antMatchers(HttpMethod.GET, "/ratings").permitAll().anyRequest().authenticated().and().csrf()
 				.disable();
 
 	}

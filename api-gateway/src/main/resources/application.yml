@@ -1,0 +1,23 @@
+server:
+  port: 9191
+
+
+
+spring:
+  config:
+    import: "optional:configserver:"
+  application:
+    name: API-GATEWAY
+  cloud:
+    config:
+      uri: http://localhost:8888
+    gateway:
+      routes:
+      - id: BOOK-SERVICE
+        uri: lb://BOOK-SERVICE
+        predicates:
+        - Path=/books/**
+      - id: RATING-SERVICE
+        uri: lb://RATING-SERVICE
+        predicates:
+        - Path=/ratings/**
