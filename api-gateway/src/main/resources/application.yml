@@ -17,7 +17,49 @@ spring:
         uri: lb://BOOK-SERVICE
         predicates:
         - Path=/books/**
+        filters:
+        - name: CircuitBreaker
+          args:
+            name: bookCircuitBreaker
+            fallbackUri: forward:/fallback/test
+        
       - id: RATING-SERVICE
         uri: lb://RATING-SERVICE
         predicates:
         - Path=/ratings/**
+        filters:
+        - name: Retry
+          args:
+            retries: 10
+            statuses: BAD_GATEWAY
+            backoff:
+              firstBackoff: 10ms
+              maxBackoff: 50ms
+              factor: 2
+              basedOnPreviousValue: false
+  circuitbreaker:
+   resilience4j:
+    enabled: false
+        
+
+
+resilience4j.circuitbreaker:
+  configs:
+    default:
+      registerHealthIndicator: true
+      slidingWindowSize: 10
+      minimumNumberOfCalls: 5
+      permittedNumberOfCallsInHalfOpenState: 3
+      automaticTransitionFromOpenToHalfOpenEnabled: true
+      waitDurationInOpenState: 5s
+      failureRateThreshold: 50
+
+management:
+  health:
+   circuitbreakers:
+    enable: true
+  endpoints.web.exposure.include: '*'
+  endpoint:
+    health:
+      show-details: always
+        
